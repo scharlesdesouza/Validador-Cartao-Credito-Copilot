@@ -30,5 +30,5 @@ def validar_cartao_credito(cartao):
 
 # Exemplo de uso:
 cartao = "2149 8161210 2031 "
-print(validar_cartao_credito(cartao))  # Saída: Visa
+print(validar_cartao_credito(cartao))  # Saída: EnRoute
 
