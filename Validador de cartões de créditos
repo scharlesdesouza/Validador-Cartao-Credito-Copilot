@@ -1,0 +1,34 @@
+import re
+
+def validar_cartao_credito(cartao):
+    cartao = cartao.replace(" ", "")  # Remover espaços, se houver
+    
+    # Verificar se o número do cartão tem apenas dígitos e o comprimento correto
+    if not cartao.isdigit() or len(cartao) < 13 or len(cartao) > 19:
+        return "Número de cartão inválido"
+
+    # Bandeiras por prefixo
+    bandeiras = {
+        "Visa": r"^4\d{12,18}$",
+        "MasterCard": r"^5[1-5]\d{14}$",
+        "American Express": r"^3[47]\d{13}$",
+        "Diners Club": r"^3(?:0[0-5]|[68]\d)\d{11}$",
+        "Discover": r"^6(?:011|5\d{2})\d{12}$",
+        "EnRoute": r"^2[0-9]{12,14}$",
+        "JCB": r"^(?:2131|1800|35\d{3})\d{11}$",
+        "Voyager": r"^8699[0-9]\d{10}$",
+        "Hipercard": r"^60\d{12,15}$",
+        "Aura": r"^50\d{14}$",
+    }
+
+    # Verificar cada bandeira
+    for bandeira, padrao in bandeiras.items():
+        if re.match(padrao, cartao):
+            return bandeira
+
+    return "Bandeira não reconhecida"
+
+# Exemplo de uso:
+cartao = "2149 8161210 2031 "
+print(validar_cartao_credito(cartao))  # Saída: Visa
+
